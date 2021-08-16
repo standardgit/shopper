@@ -1,18 +1,23 @@
 <h2>
-    <%= link_to 'Categories', root_path %>/
-    <% @category.title %>/
+    <%= link_to "Categories", root_path %> /
+    <%= @category.title %> /
     products
 </h2>
 
 <ol>
     <% @products.each do |product| %>
         <li>
-            <%= product.title %> (<%=  product.price %>)
-
+            <%= product.title %> (<%= number_to_currency product.price %>)
+            
+            <%= form_tag order_items_path do %>
+                <%= hidden_field_tag :product_id, product.id %>
+                <%= number_field_tag :quantity, 1 %>
+                <%= submit_tag "Add to cart" %>
+            <% end %>
             <ul>
-                <% product.variants.each do |variant| %>
+                <% product.product_variants.each do |variant| %>
                     <li>
-                        <%= variant.title %> (<%=  variant.price %>)
+                        <%= variant.title %> (<%= number_to_currency variant.price %>)
                     </li>
                 <% end %>
             </ul>
