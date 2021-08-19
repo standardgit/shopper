@@ -1,4 +1,4 @@
-class ShoppingCart
+class ShoppingCart 
 
     def initialize(token:)
         @token = token
@@ -13,7 +13,7 @@ class ShoppingCart
     def add_item(product_id:, quantity: 1)
         product = Product.find(product_id)
 
-        order_item = order.items.find_or_create_by(
+        order_item = order.items.find_or_initialize_by(
             product_id: product_id
         )
 
